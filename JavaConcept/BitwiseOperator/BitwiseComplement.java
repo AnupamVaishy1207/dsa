@@ -1,3 +1,4 @@
+package JavaConcept.BitwiseOperator;
 
 import java.util.Scanner;
 
@@ -23,9 +24,10 @@ Binary += (Math.pow(10, power) * bit) ;
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        try (Scanner sc = new Scanner(System.in)) {
+            int n = sc.nextInt();
 // int not=~DecToBin(n);
-        System.out.println(DecToBin(n));
+            System.out.println(DecToBin(n));
+        }
     }
 }

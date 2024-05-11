@@ -1,4 +1,4 @@
-
+package JavaConcept.BitwiseOperator;
 
 import java.util.Scanner;
 
@@ -26,10 +26,11 @@ public class BinaryToDecimal {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        try (Scanner sc = new Scanner(System.in)) {
+            int n = sc.nextInt();
 
-        System.out.println("Decimal representation of " + n + " is " + BinToDec(n));
+            System.out.println("Decimal representation of " + n + " is " + BinToDec(n));
+        }
     }
 
 }

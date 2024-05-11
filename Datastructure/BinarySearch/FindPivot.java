@@ -2,7 +2,6 @@ package Datastructure.BinarySearch;
 
 public class FindPivot {
     public int getPivot(int[] nums,int length) {
-        int size=length;
         int s = 0;
         int e = nums.length - 1;
         int mid = s + (e - s) / 2;

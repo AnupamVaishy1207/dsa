@@ -10,7 +10,7 @@ public class Stack {
         top=-1;
     }
     public void push(int value){
-        //1.Reposition top
+        //1.Reposition top 0-1 1-2 2-3 3-4 4-5 
         top++;
         //2.add value at top index
         arr[top]=value;

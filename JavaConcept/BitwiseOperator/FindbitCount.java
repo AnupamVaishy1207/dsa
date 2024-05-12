@@ -1,5 +1,4 @@
-
-
+package JavaConcept.BitwiseOperator;
 
 import java.util.Scanner;
 

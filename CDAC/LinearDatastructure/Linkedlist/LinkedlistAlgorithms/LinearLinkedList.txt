@@ -1,0 +1,53 @@
+Algorithm for AddFirst method in Singly Linked List
+================================================================
+
+Step 1 -> Create a node with given data
+
+----------------------------------------------------------------
+
+Step 2 -> Add head into next of new node.
+
+----------------------------------------------------------------
+
+Step 3 -> Add new Node into head.
+
+---------------------------------------------------------------
+Algorithm for AddLast method in Singly Linked List
+================================================================
+
+Step 1 -> create a newnode for given data
+
+----------------------------------------------------------------
+
+Step 2 -> if list is empty.
+         <a> add newnode into head itself
+----------------------------------------------------------------
+
+Step 3 -> If list is not empty
+		  <a>. traverse till last node
+		  <b>. add newnode into next of last node  
+
+---------------------------------------------------------------
+Algorithm for Add At Position method in Singly Linked List
+================================================================
+
+Step 1 -> create a newnode for given data
+
+----------------------------------------------------------------
+
+Step 2 -> if list is empty.
+         <a> add newnode into head itself
+		// special case 1 : pos <= 1
+		<b>. add pos node into next of newnode
+        <c>.add newnode into next of pos - 1 node
+
+----------------------------------------------------------------
+
+Step 3 -> If list is not empty
+		  <a>. traverse till pos - 1 node
+          special case 2 : pos > count + 1
+		  <b>. Add pos node into next of newnode.
+         <c>. add newnode into next of pos - 1 node
+
+---------------------------------------------------------------
+

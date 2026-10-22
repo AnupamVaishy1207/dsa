@@ -1165,3 +1165,177 @@ For scenario questions, structure the answer as:
 For design questions, discuss trade-offs. For coding questions, explain assumptions, edge cases, complexity, and why the chosen algorithm works.
 
 **Be accurate about experience:** If a tool or pattern is something you have studied rather than implemented in production, describe it as knowledge or a practice example rather than claiming professional hands-on experience.
+
+# throw and throws in Java
+
+*Last updated: 30 Sep, 2026*
+
+Exception handling in Java helps manage runtime errors and prevents the program from crashing, allowing the normal flow of the application to continue. Java provides specific keywords to handle and manage exceptions effectively.
+
+- `throw` is used to explicitly throw an exception.
+- `throws` is used to declare exceptions in a method signature.
+
+## `throw` Keyword
+
+The `throw` keyword is used to explicitly throw an exception from a method or any block of code. We can throw either a checked or an unchecked exception. It is mainly used to throw custom exceptions.
+
+- Written inside a method or block.
+- Stops program execution immediately after it executes.
+
+**Syntax:**
+
+```java
+throw new ExceptionName("message");
+```
+
+### Example: Throw, catch and rethrow inside a method
+
+```java
+class Geeks {
+    static void fun() {
+        try {
+            throw new NullPointerException("demo");
+        } catch (NullPointerException e) {
+            System.out.println("Caught inside fun().");
+            throw e; // rethrowing the exception
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            fun();
+        } catch (NullPointerException e) {
+            System.out.println("Caught in main.");
+        }
+    }
+}
+```
+
+**Output:**
+
+```text
+Caught inside fun().
+Caught in main.
+```
+
+**Explanation:** A `NullPointerException` is explicitly thrown with `throw`. It is caught inside `fun()` and rethrown, and then caught again in `main()`.
+
+### Example: Throwing an ArithmeticException
+
+```java
+class Geeks {
+    public static void main(String[] args) {
+        int numerator = 1;
+        int denominator = 0;
+
+        if (denominator == 0) {
+            // Manually throw an ArithmeticException
+            throw new ArithmeticException("Cannot divide by zero");
+        } else {
+            System.out.println(numerator / denominator);
+        }
+    }
+}
+```
+
+**Output:**
+
+```text
+Exception in thread "main" java.lang.ArithmeticException: Cannot divide by zero
+    at Geeks.main(Geeks.java:9)
+```
+
+**Explanation:** An `ArithmeticException` is explicitly thrown using `throw` because the denominator is zero.
+
+## `throws` Keyword
+
+`throws` is used in a method signature to indicate that the method might throw one of the listed exception types. The caller of such a method has to handle the exception using a try-catch block (or declare it again).
+
+- Declares possible exceptions.
+- Mainly used with checked exceptions.
+
+**Syntax:**
+
+```java
+returnType methodName() throws ExceptionName
+```
+
+### Example 1: Unhandled checked exception
+
+```java
+class Geeks {
+    public static void main(String[] args) {
+        Thread.sleep(10000);
+        System.out.println("Hello Geeks");
+    }
+}
+```
+
+**Output:**
+
+```text
+error: unreported exception InterruptedException; must be caught or declared to be thrown
+```
+
+**Explanation:** `Thread.sleep()` may throw `InterruptedException`, a checked exception. The compiler requires it to be handled with try-catch or declared with `throws`. This program does neither, so it fails to compile.
+
+### Example 2: Declaring an exception using `throws`
+
+```java
+class Geeks {
+    public static void main(String[] args) throws InterruptedException {
+        Thread.sleep(10000);
+        System.out.println("Hello Geeks");
+    }
+}
+```
+
+**Output:**
+
+```text
+Hello Geeks
+```
+
+**Explanation:** `throws InterruptedException` declares that `main()` may throw this exception. It does not handle the exception; it passes the responsibility to the caller. If the thread is not interrupted while sleeping, the program prints `Hello Geeks`.
+
+### Example 3: Declaring and throwing an exception
+
+```java
+class Geeks {
+    static void fun() throws IllegalAccessException {
+        System.out.println("Inside fun().");
+        throw new IllegalAccessException("demo");
+    }
+
+    public static void main(String[] args) {
+        try {
+            fun();
+        } catch (IllegalAccessException e) {
+            System.out.println("Caught in main.");
+        }
+    }
+}
+```
+
+**Output:**
+
+```text
+Inside fun().
+Caught in main.
+```
+
+**Explanation:** `fun()` declares `IllegalAccessException` with `throws` and explicitly throws it with `throw`. `main()` calls `fun()` inside a try block and handles the exception in the matching catch block.
+
+## `throw` vs `throws`
+
+| `throw` | `throws` |
+|---|---|
+| Used to explicitly throw an exception. | Used to declare exceptions that a method may throw. |
+| Written inside a method or block. | Written in the method signature. |
+| Throws one `Throwable` object/reference at a time. | Can declare multiple exception types. |
+| Followed by a `Throwable` expression/reference. | Followed by exception class names. |
+| Can throw a newly created or an existing exception object. | Does not itself create or throw an exception object. |
+| Transfers control when the exception is thrown. | Only declares that an exception may occur. |
+| Can be used to throw checked and unchecked exceptions. | Commonly used to declare checked exceptions. |
+| Requires a `Throwable` object/reference to be thrown. | Does not require an exception object to be created. |
+| Example: `throw new IOException();` or `throw e;` | Example: `void test() throws IOException` |
